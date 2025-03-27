@@ -9,9 +9,7 @@ By using multi-stage builds, I was able to reduce the Docker image sizes signifi
 - **ReactApp:** 🟢 **426MB → 48MB**
 - **Java Maven Application:** 🔵 **531MB → 180MB**
 
-Image here
-
----
+![Docker Images](Images/Java and React Images.png)
 
 ## 📌 How to Build and Run the Container
 
