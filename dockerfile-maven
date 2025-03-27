@@ -1,4 +1,5 @@
 ## Stage 1: Build
+# Use the official Maven image as the base image
 FROM maven:3.9.9-eclipse-temurin-17 AS build
 WORKDIR /app
 
@@ -7,7 +8,10 @@ COPY pom.xml .
 COPY src ./src
 
 # Build the application
-RUN mvn clean package -DskipTests
+RUN mvn clean package -DskipTests && cp target/*.jar app.jar
+
+# Run the application / Optional 
+CMD ["java", "-jar", "app.jar"]
 
 ## Stage 2: Use smallest JRE image 
 FROM eclipse-temurin:17-jre-alpine
@@ -16,7 +20,5 @@ WORKDIR /app
 # Copy the built JAR file from the build stage
 COPY --from=build /app/target/*.jar app.jar
 CMD ["java", "-jar", "app.jar"]
-
-EXPOSE 5000
 
 
